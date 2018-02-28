@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     // initial arrays of car brands
     var carBrand = ["Tesla", "Honda", "Toyota", "Lexus"]
-
+    // console.log(carBrand)
     // Loop through the given car brands and assign attributes to them
     // ----- START of Loop function for the array of car brands ----
     function createButtons() {
@@ -29,31 +29,42 @@ $(document).ready(function () {
 
     // Create button for every new car brand.
         $("#addCarBrand").on("click", function (event) {
-            event.prefentDefault()
+            event.preventDefault()
 
             var carBrandInput = $("#carBrands-input").val().trim()
+            var newCarButton = $("#buttonSection")
 
-        //     // add new car brand into the array
+            // render new button for the new car brand
+            newCarButton.append("<button>" +carBrandInput+  "</button>")
+            
+            // add new car brand into the array
             carBrand.push(carBrandInput)
 
-        //     // create the button
-            createButtons()
+            // clear input text box
+            $("#carBrands-input").val(" ")
         })
 
-// // I need to create an input of text with a button
-//     $("#add-carBrand").on("click", function () {
-//             // event.preventDefault()
-//             console.log("clicked")
-//             // var newCarBrand = $("#carBrand-input").val().trim()
+    function displayGIFs () {
 
-//             // $("button").append()
-//         })
+        var brands = $(this).attr("data-name")
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q="+brands+"&api_key=zfsw6K8gNmu19gskqjynTaRS65B7R0SF&limit=10"
+            console.log(queryURL)
+        $.ajax({
+            url: queryURL,
+            method: "GET",
+        }).then(function(response){
+
+            var gifSection = $("<div class = 'gifs'>")
+
+        })
+
+    }
 
     // this function appends the GIF for the initial buttons set in the HTML
     // $("button").on("click", function(){
     //         var x = $(this).data("search")
 
-    //         var queryURL = "http://api.giphy.com/v1/gifs/search?q="+x+"&api_key=zfsw6K8gNmu19gskqjynTaRS65B7R0SF&limit=10"
+            // var queryURL = "http://api.giphy.com/v1/gifs/search?q="+x+"&api_key=zfsw6K8gNmu19gskqjynTaRS65B7R0SF&limit=10"
     //         console.log(queryURL)
 
     //         $.ajax({

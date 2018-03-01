@@ -70,14 +70,31 @@ $(document).ready(function () {
     
             for (var i = 0; i < response.data.length; i++){
                 // console.log(response.data.length)
-                gifSection.html("<p>Rating:" +response.data[i].rating+ "</p>")
-                gifSection.html("<img src = '" +response.data[i].images.downsized.url + "'>")
-                
-            }
+                gifSection.prepend("<p>Rating:" +response.data[i].rating+ "</p>")
+                gifSection.prepend("<img src = '" +response.data[i].images.fixed_height_still.url + "' data-still = '" +response.data[i].images.fixed_height_still.url+"' data-animate = '" +response.data[i].images.fixed_height.url+"' state = 'still' >")
 
-          
+                $("img").on("click", function(){
+                    console.log("clicked")
+                    var state = $(this).attr("state")
+
+                    if (state === "still"){
+                        $(this).attr("src", $(this).attr("data-animate"))
+                        $(this).attr("state", "active")
+                        // console.log(state)
+                    }
+                    else {
+                        $(this).attr("src", $(this).attr("data-still"))
+                        $(this).attr("state", "still")
+                    }
+                    
+                })// --- END of img click function
+                
+            }// --- END of For Loop ---
+
         })
+        // gifSection.empty()
     })
+    
     
 
 // ----- END of document.ready function ----- 

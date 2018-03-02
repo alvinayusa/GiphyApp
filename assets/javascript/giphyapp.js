@@ -3,9 +3,9 @@ $(document).ready(function () {
 
     // initial arrays of car brands
     var carBrand = ["Tesla", "Honda", "Toyota", "Lexus"]
-    // console.log(carBrand)
-    // Loop through the given car brands and assign attributes to them
-    // ----- START of Loop function for the array of car brands ----
+    
+    
+    // --- START of function which creates the buttons as well as add the corresponding attributes and classes. ---
     function createButtons() {
 
         for (var x = 0; x < carBrand.length; x++) {
@@ -25,7 +25,7 @@ $(document).ready(function () {
             $("#buttonSection").append(b)
         }
     }createButtons()
-    // ----- END of Loop  -----
+    // --- END of function creating buttons  ---
 
     // Create button for every new car brand. this adds new buttons for every new input text.
         $("#addCarBrand").on("click", function (event) {
@@ -43,18 +43,19 @@ $(document).ready(function () {
         
             // clear input text box
             $("#carBrands-input").val(" ")
-        })
+        })// --- END of on click event creating new buttons based on new input. ---
+        
     
     // this calls the creation of the display gifs function to display them in the gifs section.
-    function displayGIFs () {
+    // function displayGIFs () {
 
-    }
+    // }
     
     // this function appends the GIF for the for each click of any buttons set in the HTML
     $(document).on("click", ".car-btn", function(){
        
         var brands = $(this).attr("data-name")
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q="+brands+"&api_key=zfsw6K8gNmu19gskqjynTaRS65B7R0SF&limit=10"
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q="+brands+"&api_key=zfsw6K8gNmu19gskqjynTaRS65B7R0SF&limit=10"
             
             // this starts my ajax function
             $.ajax({
@@ -66,7 +67,7 @@ $(document).ready(function () {
             
             var gifSection = $("<div class = 'gifs'>").appendTo("#newCarBrands")
             
-            // this clears / empties my gifs section div
+            // this clears or empties my gifs section div
             $(".gifs").empty()
             
             // i am looping the responses to make my gifs dynamic for each button i click.

@@ -27,10 +27,11 @@ $(document).ready(function () {
     }createButtons()
     // ----- END of Loop  -----
 
-    // Create button for every new car brand.
+    // Create button for every new car brand. this adds new buttons for every new input text.
         $("#addCarBrand").on("click", function (event) {
             event.preventDefault()
 
+            // these are my variables for the on click button.
             var carBrandInput = $("#carBrands-input").val().trim()
             var newCarButton = $("#buttonSection")
             
@@ -43,44 +44,48 @@ $(document).ready(function () {
             // clear input text box
             $("#carBrands-input").val(" ")
         })
-
+    
+    // this calls the creation of the display gifs function to display them in the gifs section.
     function displayGIFs () {
 
-        
     }
     
-    // this function appends the GIF for the initial buttons set in the HTML
+    // this function appends the GIF for the for each click of any buttons set in the HTML
     $(document).on("click", ".car-btn", function(){
-
-        // var x = $(this).data("search")
        
         var brands = $(this).attr("data-name")
-        // console.log(brands)
         var queryURL = "http://api.giphy.com/v1/gifs/search?q="+brands+"&api_key=zfsw6K8gNmu19gskqjynTaRS65B7R0SF&limit=10"
-            // console.log(queryURL)
-       
+            
+            // this starts my ajax function
             $.ajax({
             url: queryURL,
             method: "GET",
        
         }).then(function(response){
-            console.log(response.data[0])
+            
             
             var gifSection = $("<div class = 'gifs'>").appendTo("#newCarBrands")
-    
+            
+            // this clears / empties my gifs section div
+            $(".gifs").empty()
+            
+            // i am looping the responses to make my gifs dynamic for each button i click.
             for (var i = 0; i < response.data.length; i++){
-                // console.log(response.data.length)
+                
+                // jQuery which writes the gifs on the HTML
                 gifSection.prepend("<p>Rating:" +response.data[i].rating+ "</p>")
                 gifSection.prepend("<img src = '" +response.data[i].images.fixed_height_still.url + "' data-still = '" +response.data[i].images.fixed_height_still.url+"' data-animate = '" +response.data[i].images.fixed_height.url+"' state = 'still' >")
 
+                // function of what happens for each image click -- includes the conditions on when they should go static or animated
                 $("img").on("click", function(){
-                    console.log("clicked")
+                    
                     var state = $(this).attr("state")
 
+                    // if the state of the image is "still", then call the data-animate url
                     if (state === "still"){
                         $(this).attr("src", $(this).attr("data-animate"))
                         $(this).attr("state", "active")
-                        // console.log(state)
+                        
                     }
                     else {
                         $(this).attr("src", $(this).attr("data-still"))

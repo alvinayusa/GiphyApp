@@ -54,7 +54,7 @@ $(document).ready(function () {
     $(document).on("click", ".car-btn", function(){
        
         var brands = $(this).attr("data-name")
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q="+brands+"&api_key=zfsw6K8gNmu19gskqjynTaRS65B7R0SF&limit=10"
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q="+brands+"&api_key=zfsw6K8gNmu19gskqjynTaRS65B7R0SF&limit=10"
             
             // this starts my ajax function
             $.ajax({

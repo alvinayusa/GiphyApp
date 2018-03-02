@@ -44,12 +44,6 @@ $(document).ready(function () {
             // clear input text box
             $("#carBrands-input").val(" ")
         })// --- END of on click event creating new buttons based on new input. ---
-        
-    
-    // this calls the creation of the display gifs function to display them in the gifs section.
-    // function displayGIFs () {
-
-    // }
     
     // this function appends the GIF for the for each click of any buttons set in the HTML
     $(document).on("click", ".car-btn", function(){
